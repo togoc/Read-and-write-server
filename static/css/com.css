@@ -1,0 +1,296 @@
+    /* common */
+
+    body {
+        margin-top: 50px;
+        margin-bottom: 50px;
+        padding: 10px;
+    }
+
+    .check_box {
+        padding: 20px;
+        text-align: left;
+    }
+
+    .check_box table {
+        margin: auto;
+    }
+
+    .tr2 td:first-of-type {
+        text-align: center;
+    }
+
+    .tr1 td:first-of-type {
+        text-align: center;
+    }
+
+    .check_box input {
+        border-style: none;
+    }
+
+    .check_box .tips {
+        opacity: 1;
+        transition: all .5s;
+        font-size: 12px;
+        color: red;
+    }
+
+    .doc img {
+        width: 50px;
+        height: 50px;
+        margin: 0;
+        padding: 0;
+        float: left;
+    }
+
+    a:hover {
+        color: #000;
+    }
+
+    a:link {
+        color: #000;
+    }
+
+    a:visited {
+        color: #000;
+    }
+
+    .doc a {
+        text-decoration: none;
+        overflow: hidden;
+        height: 50%;
+        display: block;
+        margin-left: 10px;
+        padding-left: 10px;
+    }
+
+    .doc a:last-of-type {
+        padding-left: 20px;
+        color: rgb(206, 16, 16);
+    }
+
+    .doc {
+        border-bottom: 1px solid gray;
+        height: 50px;
+        background: rgb(230, 222, 222);
+        line-height: 25px;
+        overflow: hidden;
+    }
+
+    .doc_list, .doc {
+        width: 100%;
+        margin: auto;
+        /* background: red; */
+        /* padding: 10px; */
+    }
+
+    .doc_list {
+        margin: auto;
+    }
+
+    /* 滚动条背景 */
+
+    body::-webkit-scrollbar {
+        width: 0px;
+        background: #adadad;
+        border-radius: 3px;
+    }
+
+    /* 滚动条样式 */
+
+    body::-webkit-scrollbar-thumb {
+        background: yellow;
+        display: block;
+        border-radius: 3px;
+    }
+
+    .player {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: -1;
+        opacity: 0;
+        transition: all .3s;
+        left: 0;
+        /* background: rgba(231, 231, 185, .9); */
+        top: 0;
+        /* filter: blur(2px) */
+    }
+
+    .blur {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: -1;
+        opacity: 0;
+        transition: all .3s;
+        left: 0;
+        background: -webkit-linear-gradient(left top, rgb(0, 0, 0), #FFFFFF, #999999, #CCCCCC);
+        /* Safari 5.1 - 6.0 */
+        background: -o-linear-gradient(bottom right, rgb(0, 0, 0), #FFFFFF, #999999, #CCCCCC);
+        /* Opera 11.1 - 12.0 */
+        background: -moz-linear-gradient(bottom right, rgb(0, 0, 0), #FFFFFF, #999999, #CCCCCC);
+        /* Firefox 3.6 - 15 */
+        background: linear-gradient(to bottom right, rgb(0, 0, 0), #FFFFFF, #999999, #CCCCCC);
+        /* 标准的语法（必须放在最后） */
+        top: 0;
+        filter: blur(2px)
+    }
+
+    /* .blur div:nth-of-type(1){
+        width: 222px;
+        height: 333px;
+        background: red;
+    }
+    .blur div:nth-of-type(2){
+        width: 222px;
+        height: 333px;
+        background: rgb(35, 187, 15);
+    } */
+
+    .show {
+        z-index: 999 !important;
+        opacity: 1 !important;
+    }
+
+    .show1 {
+        z-index: 998 !important;
+        opacity: .8 !important;
+    }
+
+    .close {
+        cursor: pointer;
+        width: 100%;
+        position: fixed;
+        height: 50px;
+        left: 0;
+        top: 0;
+        background: -webkit-linear-gradient(left, black, snow);
+        /* Safari 5.1 - 6.0 */
+        background: -o-linear-gradient(right, black, snow);
+        /* Opera 11.1 - 12.0 */
+        background: -moz-linear-gradient(right, black, snow);
+        /* Firefox 3.6 - 15 */
+        background: linear-gradient(to right, black, snow);
+        /* 标准的语法（必须放在最后） */
+        z-index: 999;
+    }
+
+    .close img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .player video {
+        width: 100%;
+        height: 80%;
+        margin-top: 50px;
+        display: block;
+        position: relative;
+        z-index: 999;
+    }
+
+    .control {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 50px;
+        left: 0;
+    }
+
+    .location {
+        background: #ccc;
+        width: 100%;
+        display: flex;
+        position: fixed;
+        height: 50px;
+        top: 0;
+        left: 0;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .control input {
+        width: 50%;
+        height: 50px;
+        /* border-style: none; */
+        margin: 0;
+        cursor: pointer;
+        padding: 0;
+    }
+
+    .control_layout {
+        display: flex;
+    }
+
+    .postfile {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        transition: all .2s;
+        margin: auto;
+        opacity: 0;
+    }
+
+    .postFile_style {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        width: 100%;
+        height: 100%;
+        /* background: wheat; */
+        background: -webkit-linear-gradient(rgba(255, 0, 0, 0.37), rgba(0, 0, 255, 0.164));
+        /* Safari 5.1 - 6.0 */
+        background: -o-linear-gradient(rgba(255, 0, 0, 0.37), rgba(0, 0, 255, 0.164));
+        /* Opera 11.1 - 12.0 */
+        background: -moz-linear-gradient(rgba(255, 0, 0, 0.37), rgba(0, 0, 255, 0.164));
+        /* Firefox 3.6 - 15 */
+        background: linear-gradient(rgba(255, 0, 0, 0.37), rgba(0, 0, 255, 0.164));
+        /* 标准的语法（必须放在最后） */
+    }
+
+    .postFile_style form {
+        width: 300px;
+        display: flex;
+        height: 60px;
+        background: rgb(238, 232, 222);
+        border-radius: 20px;
+    }
+
+    .postFile_style form input {
+        margin: auto;
+        cursor: pointer;
+        display: block;
+    }
+
+    .postFile_style form input:first-of-type {
+        width: 180px;
+    }
+
+    .postfile label {
+        position: absolute;
+        left: 0;
+        line-height: 50px;
+        height: 50px;
+        top: 0;
+    }
+
+    .post_index {
+        color: red;
+    }
+
+    .close_post {
+        position: fixed;
+        right: 0;
+        cursor: pointer;
+        top: 0;
+        width: 50px;
+        height: 50px;
+    }
+
+    .close_post img {
+        width: 50px;
+        height: 50px;
+    }
