@@ -27,7 +27,7 @@ app.get('/home', function (req, res) {
         }
     };
 
-    var fileName = 'home.html';
+    var fileName = '/static/home.html';
     // 发送文件
     res.sendFile(fileName, options, function (err) {
         if (err) {
@@ -102,9 +102,9 @@ app.post('/formdata', function (req, res) {
 })
 
 app.get('/homepage', function (req, res) {
-    index = __dirname + '新建文件夹';
+    index = __dirname;
     var data = {
-        files: fs.readdirSync(__dirname + '新建文件夹/'),
+        files: fs.readdirSync(__dirname),
         index
     }
     res.send(data)//同步

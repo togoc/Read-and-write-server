@@ -155,7 +155,7 @@
             } else {
                 $('.player').toggleClass('show');
                 $('.blur').toggleClass('show1');
-                document.querySelector('video').src = (callback.index.split('\\'))[1] + '/' + $(this).html()
+                document.querySelector('video').src = '/' + (callback.index.split('\\'))[1] + '/' + $(this).html()
             }
         })
         $('.close').click(function () {
