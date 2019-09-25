@@ -46,11 +46,11 @@ app.get('/read', function (req, res) {
         if (index.indexOf('/') != -1) {
             index = index.slice(0, index.lastIndexOf('/'))
         } else {
-            index = 'd:\\'
+            index = __dirname
         }
         t = (fs.readdirSync(index))
     } else if (req.query.code) {
-        if (index == 'd:\\') {
+        if (index == __dirname) {
             index += req.query.code.split('/')[1]
         } else {
             index += req.query.code
