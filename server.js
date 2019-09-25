@@ -43,6 +43,7 @@ var index, t
 app.get('/read', function (req, res) {
     console.log("dir", __dirname)
     console.log("req", req.query)
+    console.log(index)
     if (req.query.prev) {
         console.log(req.query.prev)
         if (index.indexOf('/') != -1) {
