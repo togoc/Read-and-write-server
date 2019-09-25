@@ -61,8 +61,9 @@
         window.history.replaceState(null, null, 'home');
         // window.history.pushState(null, null, 'home');
         fix(callback.files);
-        var arr = str.split('\\');
-        location.hash = 'd:\\' + arr[1]
+        // var arr = str.split('\\');
+        // location.hash = 'd:\\' + arr[1]
+        location.hash = str
         $('.location h4').html(decodeURIComponent(location.hash));
         lastPosition.push(callback.index);
     }

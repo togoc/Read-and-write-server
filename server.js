@@ -41,16 +41,18 @@ app.get('/home', function (req, res) {
 
 var index, t
 app.get('/read', function (req, res) {
+    console.log("dir", __dirname)
+    console.log("req", req.query)
     if (req.query.prev) {
         console.log(req.query.prev)
         if (index.indexOf('/') != -1) {
             index = index.slice(0, index.lastIndexOf('/'))
         } else {
-            index = __dirname
+            index = __dirname + "/"
         }
         t = (fs.readdirSync(index))
     } else if (req.query.code) {
-        if (index == __dirname) {
+        if (index == (__dirname) + "/") {
             index += req.query.code.split('/')[1]
         } else {
             index += req.query.code
@@ -66,6 +68,8 @@ app.get('/read', function (req, res) {
         index
     })
 })
+
+// console.log(fs.readdirSync(__dirname+"/"))
 
 app.post('/formdata', function (req, res) {
     console.log(req.query)
@@ -84,7 +88,7 @@ app.post('/formdata', function (req, res) {
                 } else {
                     dir_file = __dirname + 'dist/' + req.files[0].originalname
                 }
-
+                console.log(dir_file)
                 fs.writeFile(dir_file, data, function (err) {
                     var obj = {
                         msg: 'upload success',
@@ -110,6 +114,6 @@ app.get('/homepage', function (req, res) {
     res.send(data)//同步
 })
 
-app.listen('8080', function () {
+app.listen('80', function () {
     console.log(' running now ! (this is a readfiles system !)')
 })
