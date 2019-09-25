@@ -67,7 +67,7 @@ app.get('/read', function (req, res) {
     res.send({
         files: t,
         index,
-        hode: __dirname
+        home: __dirname
     })
 })
 

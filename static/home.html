@@ -148,6 +148,9 @@
                 oevent.returnValue = false
             }
 
+            var str = ["c:", "Users", "togoc", "Desktop", "Read_and_write_server/static"]
+            str[-1]
+
             if ($(this).html().indexOf('.') == -1) {
                 var url = $(this).html()
                 $.ajax({ url: '/read?code=/' + url }).done(function (res) {
@@ -157,7 +160,7 @@
             } else {
                 $('.player').toggleClass('show');
                 $('.blur').toggleClass('show1');
-                document.querySelector('video').src = '/' + (callback.index.split('\\'))[1] + '/' + $(this).html()
+                document.querySelector('video').src =(callback.index.split('Read_and_write_server')).pop() + '/' + $(this).html()
             }
         })
         $('.close').click(function () {
