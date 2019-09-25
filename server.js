@@ -66,7 +66,8 @@ app.get('/read', function (req, res) {
     }
     res.send({
         files: t,
-        index
+        index,
+        hode: __dirname
     })
 })
 
@@ -110,7 +111,8 @@ app.get('/homepage', function (req, res) {
     index = __dirname;
     var data = {
         files: fs.readdirSync(__dirname),
-        index
+        index,
+        home: __dirname
     }
     res.send(data)//同步
 })

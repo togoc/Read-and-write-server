@@ -69,13 +69,14 @@
     }
 
     function prev() {
+        console.log(callback)
         if (callback.index.indexOf('/'))
             lastFile = callback.index.slice(callback.index.lastIndexOf('/'))
 
-        if (callback.index == 'd:\\')
+        if (callback.index == callback.home)
             lastFile = 0
 
-        if (callback.index != 'd:\\' && callback.index.indexOf('/') == -1)
+        if (callback.index != callback.home && callback.index.indexOf('/') == -1)
             lastFile = (callback.index.split('\\'))[1]
 
 
