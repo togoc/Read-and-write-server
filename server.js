@@ -1,3 +1,4 @@
+const GetDir = require("./components/getDir")
 const express = require('express')
 const fs = require('fs')
 const app = express()
@@ -41,24 +42,13 @@ app.get('/home', function (req, res) {
 
 var index, t
 app.get('/read', function (req, res) {
-    console.log("dir", __dirname)
-    console.log("req", req.query)
     console.log(index)
     if (req.query.prev) {
-        console.log(req.query.prev)
-        if (index.indexOf('/') != -1) {
-            index = index.slice(0, index.lastIndexOf('/'))
-        } else {
-            index = __dirname + "/"
-        }
-        t = (fs.readdirSync(index))
+        res.send(GetDir.getHomeDir(req.query.prev, prev = true))
+        return
     } else if (req.query.code) {
-        if (index == (__dirname) + "/") {
-            index += req.query.code.split('/')[1]
-        } else {
-            index += req.query.code
-        }
-        t = (fs.readdirSync(index))
+        res.send(GetDir.getHomeDir(req.query.code))
+        return
     } else if (req.query.back) {
         console.log(req.query.back)
         index = req.query.back
@@ -109,12 +99,7 @@ app.post('/formdata', function (req, res) {
 
 app.get('/homepage', function (req, res) {
     index = __dirname;
-    var data = {
-        files: fs.readdirSync(__dirname),
-        index,
-        home: __dirname
-    }
-    res.send(data)//同步
+    res.send(GetDir.getHomeDir(index))//同步
 })
 
 app.listen('80', function () {
