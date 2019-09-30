@@ -14,6 +14,6 @@
 * 新增创建文件夹,不能创建隐藏文件夹(文件夹名不可包含'.'或已存在或空).
 * 新增所有文件内容下载.
 * 手机浏览页面   
-  ![](/images/onphone.jpg){:height="539" width="255"}
+* <img src="/togoc/Read_and_write_server/raw/master/images/onphone.jpg" alt="" style="max-width:40%;">
 * 上传页面
   ![](/images/up_file.png){:height="250" }
