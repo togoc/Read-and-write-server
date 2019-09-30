@@ -2,7 +2,6 @@ var callback
 var lastPosition = []
 var lastFile
 function changeHash(str) {
-
     window.history.replaceState(null, null, 'home');
     // window.history.pushState(null, null, 'home');
     fix(callback.files);
