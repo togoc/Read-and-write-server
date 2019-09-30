@@ -76,6 +76,10 @@ function fix(arr) {
             }
         }
     }
+    /**
+     * 输入一个目录数组,页面添加内容
+     * @param {array} arr 关于当前文件夹下文件目录的数组
+     */
     function addUnknowFile(arr) {
         let dir = null
         if (callback.home == callback.index) {
@@ -158,8 +162,6 @@ function postFile() {
     } else {
         url = 'formdata'
     }
-
-    console.log(data)
     $.ajax({
         method: 'post',
         url: url,
@@ -191,6 +193,10 @@ window.addEventListener('popstate', function () {
     }
 })
 
+/**
+ * @param {string} index 当前目录地址
+ * @param {string} dirName 文件夹名
+ */
 function mkdir(index, dirName) {
     ajax("/mkdir?index=" + index + "&dirName=" + dirName)
 }
@@ -218,6 +224,12 @@ window.onload = function () {
         </div>
         
         `)
+        /**
+         * 输入一个关于文件夹目录地址的数组,返回一个 {index , arr1} 对象 , 
+         * index : 有几个文件夹目录  
+         * arr1 : 当前目录下关于所有文件夹名字的数组
+         * @param {array} arr 文件夹目录数组
+         */
         function LastIndexOfDir(arr) {
             let index = 0
             let arr1 = []
