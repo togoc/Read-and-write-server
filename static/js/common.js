@@ -14,7 +14,11 @@ function changeHash(str) {
 }
 
 /**
- * @param {string} url 请求地址和内容
+ * @param {string} url 请求地址和内容 , 
+ * 如果是读取目录 : "/read?code=" + 目录地址 ; 
+ * 如果是返回目录 : "/read?prev=" + 目录地址 ; 
+ * 如果是主目录 : "/homepage" .
+ * 
  */
 function ajax(url) {
     $.ajax({ url }).done(function (res) {
@@ -118,7 +122,7 @@ function getData() {
             document.querySelector('video').src = (callback.index.split('Read_and_write_server')).pop() + '/' + $(this).html()
         }
     })
-    $('.close').click(function () {
+    $('.player_close').click(function () {
         $('.player').removeClass('show')
         $('.blur').removeClass('show1')
         document.querySelector('video').src = ''
@@ -131,11 +135,13 @@ function addPost() {
     $('.blur').toggleClass('show1');
     $('.postfile').toggleClass('show1');
     $('.close_post').click(function () {
+        ajax("/read?prev=" + callback.index);
         $('.postfile').removeClass('show1');
         $('.blur').removeClass('show1');
     })
 }
 var this_file = document.querySelector('.this_file')
+
 function postFile() {
     var url
     var this_file = document.querySelector('.this_file')
@@ -146,7 +152,7 @@ function postFile() {
     }
 
     console.log(data)
-    $.post({
+    $.ajax({
         method: 'post',
         url: url,
         data: new FormData(document.querySelector('.formdata')),
@@ -177,23 +183,61 @@ window.addEventListener('popstate', function () {
     }
 })
 
-
+function mkdir(index, dirName) {
+    ajax("/mkdir?index=" + index + "&dirName=" + dirName)
+}
+var flat = true
 
 window.onload = function () {
-    $.ajax({ url: '/homepage' }).done(function (res) {
-        callback = res;
-        changeHash(callback.index)
-    })
-    $('.control input[type=button]:first-of-type').click(function () {
+    ajax("/homepage");
+    $('#last_dir').click(function () {
         prev()
     });
-    $('.control input[type=button]:nth-of-type(2)').click(function () {
-        addPost()
+    $('#post_file').click(function () {
+        if ($(this).val() == "上传文件")
+            addPost()
     });
-    $('.control input[type=button]:last-of-type').click(function () {
+    $('#mkdir').click(function () {
+        ($(this).val() == "确认") ? ($(this).val("新建文件夹")) : ($(this).val("确认"));
+        $(this).toggleClass("button_style");
+        // ($("#post_file").val() == "上传文件") ? ($("#post_file").val("取消")) : ($("#post_file").val("上传文件"));
+        // $("#post_file").toggleClass("button_style");
+
+        t = $(`
+        <div class="doc">
+            <img src="static/images/file.png" alt="">
+            <input id="new_dir" type="text" style="height:100%;font-size:100%"  autofocus="autofocus">
+        </div>
+        
+        `)
+        function LastIndexOfDir(arr) {
+            let index = 0
+            let arr1 = []
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i].indexOf('.') == -1) {
+                    index++
+                    arr1.push(arr[i])
+                }
+            }
+            return { index, arr1 }
+        }
+
+        if ($(this).val() == "新建文件夹") {
+            if ($("#new_dir").val().trim() != "" && $("#new_dir").val().indexOf(".") == -1 && !LastIndexOfDir(callback.files).arr1.some((i) => i == $("#new_dir").val())) {
+                mkdir(callback.index, $("#new_dir").val().trim())
+            } else {
+                alert("输入有误(文件夹名不可包含'.'或已存在或空)");
+                ajax("/read?code=" + callback.index);
+            }
+        } else {
+            $(`.doc_list .doc:nth-of-type(${LastIndexOfDir(callback.files).index})`).after(t)
+        }
+    });
+    $('#home').click(function () {
         location.reload()
 
     });
+
     $('.sentfile').click(function () {
         postFile()
     });

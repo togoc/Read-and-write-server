@@ -17,14 +17,15 @@
     <!-- 底部控制 -->
     <div class="control">
         <div class="control_layout">
-            <input type="button" value="上一页">
-            <input type="button" value="上传文件">
-            <input type="button" value="主页">
+            <input id="last_dir" type="button" value="上一页">
+            <input id="post_file" type="button" value="上传文件">
+            <input id="mkdir" type="button" value="新建文件夹">
+            <input id="home" type="button" value="主页">
         </div>
     </div>
     <!-- 视频播放器 -->
     <div class="player">
-        <div class="close"><img src="static/images/exit.png" alt=""></div>
+        <div class="player_close"><img src="static/images/exit.png" alt=""></div>
         <video src="" autoplay controls></video>
     </div>
     <!-- 插入文件列表 -->
@@ -42,14 +43,31 @@
     <!-- 上传文件 -->
     <div class="postfile ">
         <div class="close_post"><img src="static/images/exit.png" alt=""></div>
-        <label>当前夹<input type="checkbox" class="this_file"><span class="post_index">11</span></label>
         <div class="postFile_style">
-            <form enctype="multipart/form-data" action="#" class="formdata">
-                <input class="gua" type="file" name="name" value="tgc">
-                <input type="button" name="sum" class="sentfile" value="上传">
-            </form>
+            <div class="upstyle">
+                <label>当前夹<input type="checkbox" class="this_file"><span class="post_index">11</span></label>
+                <form enctype="multipart/form-data" action="#" class="formdata">
+                    <input class="gua" type="file" name="name" value="tgc">
+                    <input type="button" name="sum" class="sentfile" value="上传">
+                </form>
+            </div>
         </div>
     </div>
+
+
+
+
+
+    <!-- <div class="doc">
+        <img src="static/images/file.png" alt="">
+        <input type="text" style="height:100%;font-size:100%"  autofocus="autofocus">
+    </div> -->
+
+
+
+
+
+
 </body>
 <script src="static/js/juqery_3.4.1.js"></script>
 <script src="./static/js/common.js"></script>

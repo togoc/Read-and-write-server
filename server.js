@@ -54,11 +54,11 @@ app.get('/read', function (req, res) {
         index = req.query.back
         t = (fs.readdirSync(index))
     }
-    res.send({
-        files: t,
-        index,
-        home: __dirname
-    })
+    // res.send({
+    //     files: t,
+    //     index,
+    //     home: __dirname
+    // })
 })
 
 // console.log(fs.readdirSync(__dirname+"/"))
@@ -69,6 +69,9 @@ app.post('/formdata', function (req, res) {
     var dir_file
     // console.log(req.files[0].path);//保存的名字
     // console.log(req.files[0].originalname);//原来文件的名字
+    // console.log(req.files[0].filename)
+
+    // fs.rename()
 
     if (req.files[0]) {
         fs.readFile(req.files[0].path, function (err, data) {
@@ -76,18 +79,14 @@ app.post('/formdata', function (req, res) {
                 res.send({ err })
             } else {
                 if (req.query.index) {
-                    dir_file = req.query.index + '/' + req.files[0].originalname
+                    fs.renameSync(__dirname + '/dist/' + req.files[0].filename, req.query.index + '/' + req.files[0].originalname)
+                    res.send({ msg: 'upload success' });
+                    return
                 } else {
-                    dir_file = __dirname + 'dist/' + req.files[0].originalname
+                    fs.renameSync(__dirname + '/dist/' + req.files[0].filename, __dirname + '/dist/' + req.files[0].originalname)
+                    res.send({ msg: 'upload success' });
+                    return
                 }
-                console.log(dir_file)
-                fs.writeFile(dir_file, data, function (err) {
-                    var obj = {
-                        msg: 'upload success',
-                        filename: req.files[0].originalname
-                    }
-                    res.send(obj);
-                })
             }
         })
     } else {
@@ -101,6 +100,19 @@ app.get('/homepage', function (req, res) {
     index = __dirname;
     res.send(GetDir.getHomeDir(index))//同步
 })
+
+app.get("/mkdir", (req, res) => {
+    fs.mkdir(req.query.index + "/" + req.query.dirName, function (err) {
+        if (err) {
+            res.send("目录已经存在")
+            return console.error(err);
+        }
+        console.log("test2目录创建成功。");
+        res.send(GetDir.getHomeDir("", index = true))
+    });
+
+})
+
 
 app.listen('80', function () {
     console.log(' running now ! (this is a readfiles system !)')

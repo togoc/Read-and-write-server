@@ -9,14 +9,19 @@ let GetDir = {
      * @param {string} str 请求的目录
      * @param {string} prev 是否后退,默认false
      */
-    getHomeDir: function (str, prev = false) {
-        this.index = str
+    getHomeDir: function (str, prev = false, index = false) {
+        console.log(str, prev, index)
         if (this.home == null) {
             this.home = str
         }
         if (prev) {
-            this.index = str.slice(0, str.lastIndexOf("/"))
+            if (str != this.home)
+                str = str.slice(0, str.lastIndexOf("/"))
         }
+        if (!index && str != "") {
+            this.index = str
+        }
+        console.log(this.index)
         let data = {
             files: fs.readdirSync(this.index),
             index: this.index,
