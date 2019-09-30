@@ -157,7 +157,7 @@
         opacity: .8 !important;
     }
 
-    .close {
+    .player_close {
         cursor: pointer;
         width: 100%;
         position: fixed;
@@ -175,7 +175,7 @@
         z-index: 999;
     }
 
-    .close img {
+    .player_close img {
         width: 50px;
         height: 50px;
     }
