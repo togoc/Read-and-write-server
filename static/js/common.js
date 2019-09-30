@@ -55,7 +55,7 @@ function fix(arr) {
             if (arr[i].indexOf('.') == -1) {
                 t += `
                 <div class="doc">
-                    <img src="static/images/file.png" alt="">
+                    <img src="../static/images/file.png" alt="">
                     <a href="#${arr[i]}">${arr[i]}</a>
                 </div>
                 `
@@ -68,7 +68,7 @@ function fix(arr) {
             if (arr[i].indexOf('.') != -1 && (arr[i].split('.').pop() == 'mp4' || arr[i].split('.').pop() == 'avi')) {
                 t += `
                 <div class="doc">
-                    <img src="static/images/video.png" alt="">
+                    <img src="../static/images/video.png" alt="">
                     <a href="#${arr[i]}">${arr[i]}</a>
                     <a href="${(callback.index).slice(callback.index.indexOf('\\'))}\\${arr[i]}" download="${arr[i]}">点击下载</a>
                 </div>
@@ -77,13 +77,20 @@ function fix(arr) {
         }
     }
     function addUnknowFile(arr) {
+        let dir = null
+        if (callback.home == callback.index) {
+            dir = ""
+        } else {
+            dir = callback.index.split(callback.home)[1]
+        }
         for (let i = 0; i < arr.length; i++) {
             if (arr[i].indexOf('.') != -1 && arr[i].split('.').pop() != 'mp4' && arr[i].split('.').pop() != 'avi') {
                 t += `
                 <div class="doc">
-                    <img src="static/images/unknow.png" alt="">
+                    <img src="../static/images/unknow.png" alt="">
                     <a href="#${arr[i]}">${arr[i]}</a>
-                </div>
+                    <a href="${dir}/${arr[i]}" download="${arr[i]}">点击下载</a>
+                    </div>
                 
                 `
             }
@@ -114,18 +121,19 @@ function getData() {
             //     callback = res
             //     changeHash(callback.index)
             // })
-            console.log(url)
             ajax(url)
         } else {
             $('.player').toggleClass('show');
             $('.blur').toggleClass('show1');
-            document.querySelector('video').src = (callback.index.split('Read_and_write_server')).pop() + '/' + $(this).html()
+            document.querySelector('#video').src = (callback.index.split('Read_and_write_server')).pop() + '/' + $(this).html()
         }
     })
     $('.player_close').click(function () {
         $('.player').removeClass('show')
         $('.blur').removeClass('show1')
-        document.querySelector('video').src = ''
+        var video = document.querySelector('#video')
+        video.removeAttribute("src")
+        video.pause();
     })
 
 }
@@ -135,13 +143,13 @@ function addPost() {
     $('.blur').toggleClass('show1');
     $('.postfile').toggleClass('show1');
     $('.close_post').click(function () {
-        ajax("/read?prev=" + callback.index);
+        ajax("/read?code=" + callback.index);
         $('.postfile').removeClass('show1');
         $('.blur').removeClass('show1');
     })
 }
-var this_file = document.querySelector('.this_file')
 
+var this_file = document.querySelector('.this_file')
 function postFile() {
     var url
     var this_file = document.querySelector('.this_file')

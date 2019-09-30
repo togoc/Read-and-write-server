@@ -28,7 +28,7 @@ app.get('/home', function (req, res) {
         }
     };
 
-    var fileName = '/static/home.html';
+    var fileName = 'index.html';
     // 发送文件
     res.sendFile(fileName, options, function (err) {
         if (err) {
@@ -42,7 +42,7 @@ app.get('/home', function (req, res) {
 
 var index, t
 app.get('/read', function (req, res) {
-    console.log(index)
+    // console.log(index)
     if (req.query.prev) {
         res.send(GetDir.getHomeDir(req.query.prev, prev = true))
         return
@@ -66,7 +66,6 @@ app.get('/read', function (req, res) {
 app.post('/formdata', function (req, res) {
     console.log(req.query)
 
-    var dir_file
     // console.log(req.files[0].path);//保存的名字
     // console.log(req.files[0].originalname);//原来文件的名字
     // console.log(req.files[0].filename)
@@ -79,10 +78,19 @@ app.post('/formdata', function (req, res) {
                 res.send({ err })
             } else {
                 if (req.query.index) {
+                    if (GetDir.checkDir(req.files[0].originalname)) {
+                        fs.renameSync(req.query.index + '/' + req.files[0].originalname, req.query.index + '/' + req.files[0].originalname + "--" + `${new Date().getTime()}`)
+                        console.log("文件已存在!")
+                    }
+                    console.log(GetDir.checkDir(req.files[0].originalname));
                     fs.renameSync(__dirname + '/dist/' + req.files[0].filename, req.query.index + '/' + req.files[0].originalname)
                     res.send({ msg: 'upload success' });
                     return
                 } else {
+                    if (GetDir.checkDir(req.files[0].originalname)) {
+                        fs.renameSync(__dirname + '/dist/' + req.files[0].originalname, __dirname + '/dist/' + req.files[0].originalname + "--" + `${new Date().getTime()}`)
+                        console.log("文件已存在!")
+                    }
                     fs.renameSync(__dirname + '/dist/' + req.files[0].filename, __dirname + '/dist/' + req.files[0].originalname)
                     res.send({ msg: 'upload success' });
                     return

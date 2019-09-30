@@ -160,6 +160,7 @@
     .player_close {
         cursor: pointer;
         width: 100%;
+        opacity: inherit;
         position: fixed;
         height: 50px;
         left: 0;
@@ -177,12 +178,14 @@
 
     .player_close img {
         width: 50px;
+        opacity: inherit;
         height: 50px;
     }
 
     .player video {
         width: 100%;
         height: 80%;
+        opacity: inherit;
         margin-top: 50px;
         display: block;
         position: relative;
