@@ -22,7 +22,6 @@ let GetDir = {
         if (!index && str != "") {
             this.index = str
         }
-        console.log(this.index)
         this.index_dir = fs.readdirSync(this.index)
         let data = {
             files: this.index_dir,
@@ -41,11 +40,5 @@ let GetDir = {
     }
 
 }
-
-
-
-
-
-
 
 module.exports = GetDir
