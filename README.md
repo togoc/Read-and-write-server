@@ -17,7 +17,50 @@
 * 新增创建文件夹,不能创建隐藏文件夹(文件夹名不可包含'.'或已存在或空).
 * 新增所有文件内容下载.
 * 手机浏览页面   
-  
+> 3.0 文件是否存在那里其实系统有自带函数(日后看情况再改)
+* 
+  ```
+    const path = require("path")
+    let str = path.resolve(process.argv[2])
+    console.log(str)
+    try {
+        /**
+        * http://nodejs.cn/api/fs.html#fs_fs_access_path_mode_callback
+        * fs.constants.F_OK 是否存在
+        * fs.constants.W_OK | fs.constants.R_OK 是否有读写权限
+        */
+        fs.access(str, fs.constants.F_OK, (err) => {
+            if (err) {
+                console.log("文件不存在")
+                return
+            }
+            fs.stat(str, (err, stats) => {
+                if (err) {
+                    console.log(err.code)
+                    return
+                }
+                if (stats.isDirectory()) {
+                    console.log("是文件夹")
+                    fs.readdir(str, (err, data) => {
+                        if (err) throw err;
+                        console.log(data)
+                    })
+                }
+                if (stats.isFile()) {
+                    console.log("是文件")
+                    fs.readFile(str, "utf8", (err, data) => {
+                        if (err) throw err;
+                        console.log(data)
+                    })
+                }
+            })
+        })
+    } catch (err) {
+        console.log("不存在")
+        console.log(err)
+
+    }
+  ```
 ![](/images/onphone.png)
 * 上传页面
   

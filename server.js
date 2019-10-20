@@ -78,6 +78,7 @@ app.post('/formdata', function (req, res) {
                 res.send({ err })
             } else {
                 if (req.query.index) {
+                    console.log(req.query.index)
                     if (GetDir.checkDir(req.files[0].originalname)) {
                         fs.renameSync(req.query.index + '/' + req.files[0].originalname, req.query.index + '/' + req.files[0].originalname + "--" + `${new Date().getTime()}`)
                         console.log("文件已存在!")
@@ -123,5 +124,5 @@ app.get("/mkdir", (req, res) => {
 
 
 app.listen('8181', function () {
-    console.log(' running now ! (this is a readfiles system !)')
+    console.log(' running on 8181 ! (this is a readfiles system !)')
 })
