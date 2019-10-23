@@ -61,6 +61,7 @@
 
     }
   ```
+* res.download(path)
 ![](/images/onphone.png)
 * 上传页面
   
